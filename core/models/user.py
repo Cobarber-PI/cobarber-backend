@@ -38,11 +38,12 @@ class UserManager(BaseUserManager):
 
 
 class User(AbstractBaseUser, PermissionsMixin):
-    """User model in the system."""
-
     passage_id = models.CharField(max_length=255, unique=True, verbose_name=_('passage_id'), help_text=_('Passage ID'))
     email = models.EmailField(max_length=255, unique=True, verbose_name=_('email'), help_text=_('Email'))
     name = models.CharField(max_length=255, blank=True, null=True, verbose_name=_('name'), help_text=_('Username'))
+    cellphone = models.CharField(max_length=20, blank=True, null=True, unique=True, verbose_name=_('cellphone'), help_text=_('Cellphone'))
+    DOB = models.DateField(blank=True, null=True, verbose_name=_('DOB'), help_text=_('DOB'))
+    cpf = models.CharField(max_length=14, blank=True, null=True, unique=True, verbose_name=_('CPF'), help_text=_('CPF'))
     is_active = models.BooleanField(
         default=True, verbose_name=_('Usuário está ativo'), help_text=_('Indica que este usuário está ativo.')
     )
