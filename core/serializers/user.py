@@ -6,7 +6,7 @@ from datetime import date
 class UserSerializer(ModelSerializer):
     class Meta:
         model = User
-        fields = '__all__'
+        fields = ['id', 'name', 'email', 'password', 'cpf', 'cellphone', 'DOB']
         depth = 1
 
 
