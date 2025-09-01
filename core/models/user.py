@@ -38,18 +38,18 @@ class UserManager(BaseUserManager):
 
 
 class User(AbstractBaseUser, PermissionsMixin):
-    CHOICE_CHOICES = (
+    ROLE_CHOICES = (
         ("client", "Cliente"),
         ("owner", "Proprietário"),
     )
 
     passage_id = models.CharField(max_length=255, unique=True, null=True, blank=True)
     email = models.EmailField(max_length=255, unique=True, verbose_name=_('email'), help_text=_('Email'))
-    name = models.TextField(max_length=255, blank=True, null=True, verbose_name=_('name'), help_text=_('Username'))
+    name = models.CharField(max_length=255, blank=True, null=True, verbose_name=_('name'), help_text=_('Username'))
     cellphone = models.CharField(max_length=11, blank=True, null=True, unique=True, verbose_name=_('cellphone'), help_text=_('Cellphone'))
     DOB = models.DateField(blank=True, null=True, verbose_name=_('DOB'), help_text=_('DOB'))
     cpf = models.CharField(max_length=11, blank=True, null=True, unique=True, verbose_name=_('CPF'), help_text=_('CPF'))
-    choice = models.CharField(max_length=20, choices=CHOICE_CHOICES, default="client")
+    role = models.CharField(max_length=20, choices=ROLE_CHOICES, default="client")
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
 
