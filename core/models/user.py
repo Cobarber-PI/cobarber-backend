@@ -38,6 +38,7 @@ class UserManager(BaseUserManager):
 
 
 class User(AbstractBaseUser, PermissionsMixin):
+    passage_id = models.CharField(max_length=255, unique=True, null=True, blank=True)
     email = models.EmailField(max_length=255, unique=True, verbose_name=_('email'), help_text=_('Email'))
     name = models.CharField(max_length=255, blank=True, null=True, verbose_name=_('name'), help_text=_('Username'))
     cellphone = models.CharField(max_length=20, blank=True, null=True, unique=True, verbose_name=_('cellphone'), help_text=_('Cellphone'))

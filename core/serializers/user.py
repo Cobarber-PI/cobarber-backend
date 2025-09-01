@@ -11,6 +11,8 @@ class UserSerializer(ModelSerializer):
 
 
 class ClienteSerializer(ModelSerializer):
+
+    
     class Meta:
         model = User
         fields = ['id', 'name', 'email', 'password', 'cellphone', 'DOB', 'cpf']
