@@ -1,23 +1,14 @@
 from rest_framework.serializers import ModelSerializer
-
+from rest_framework import serializers
 from core.models import User
 from datetime import date
+from django.contrib.auth.models import Group
 
 class UserSerializer(ModelSerializer):
     class Meta:
         model = User
         fields = ['id', 'name', 'email', 'password', 'cpf', 'cellphone', 'DOB']
-        depth = 1
-
-
-class ClienteSerializer(ModelSerializer):
-
-    
-    class Meta:
-        model = User
-        fields = ['id', 'name', 'email', 'password', 'cellphone', 'DOB', 'cpf']
         extra_kwargs = {'password': {'write_only': True}}
-
 
 
     # Valida idade mínima de 16 anos
