@@ -4,36 +4,41 @@ from datetime import date
 from django.contrib.auth.models import Group
 
 
-# 🔹 Serializer para criação (entrada)
 class UserWriteSerializer(serializers.ModelSerializer):
-    password = serializers.CharField(write_only=True)
+    password = serializers.CharField(min_length=8, write_only=True, error_messages={
+        'min_length': 'A senha deve ter pelo menos 8 caracteres.'
+    })
+    confirm_password = serializers.CharField(write_only=True)
 
     class Meta:
         model = User
-        fields = ['id', 'name', 'email', 'password', 'cpf', 'cellphone', 'DOB']
+        fields = ['id', 'name', 'email', 'password', 'confirm_password', 'cpf', 'cellphone', 'DOB']
         extra_kwargs = {
-            'password': {'write_only': True}
+            'password': {'write_only': True},
+            'confirm_password': {'write_only': True}
         }
+        
+    def validate(self, data):
+        if data.get('password') != data.get('confirm_password'):
+            raise serializers.ValidationError({"confirm_password": "As senhas não coincidem."})
+        return data
 
     def validate_DOB(self, value):
         hoje = date.today()
         idade = hoje.year - value.year
         if (hoje.month, hoje.day) < (value.month, value.day):
             idade -= 1
-
-        if self.initial_data.get("role", "client") == "client" and idade < 16:
-            raise serializers.ValidationError("O cliente deve ter pelo menos 16 anos.")
-        if self.initial_data.get("role", "client") == "owner" and idade < 18:
-            raise serializers.ValidationError("O proprietário deve ter pelo menos 18 anos.")
-
+        if idade < 16:
+            raise serializers.ValidationError("O usuário deve ter pelo menos 16 anos.")
         return value
 
     def create(self, validated_data):
         password = validated_data.pop('password')
+        validated_data.pop('confirm_password', None)
 
         # Normaliza CPF e celular
         if validated_data.get('cpf'):
-            validated_data['cpf'] = validated_data['cpf'].replace('.', '').replace('-', '')
+            validated_data['cpf'] = validated_data['cpf'].replace('.', '').replace('-', '').replace(' ', '')
         if validated_data.get('cellphone'):
             validated_data['cellphone'] = validated_data['cellphone'].replace('(', '').replace(')', '').replace('-', '').replace(' ', '')
 
@@ -43,14 +48,6 @@ class UserWriteSerializer(serializers.ModelSerializer):
         user.is_staff = False
         user.is_superuser = False
         user.save()
-
-        # Define grupo de acordo com o role
-        if user.role == "client":
-            grupo, _ = Group.objects.get_or_create(name='compradores')
-        else:
-            grupo, _ = Group.objects.get_or_create(name='proprietarios')
-        user.groups.add(grupo)
-
         return user
 
 
