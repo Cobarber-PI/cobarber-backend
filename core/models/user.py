@@ -38,24 +38,21 @@ class UserManager(BaseUserManager):
 
 
 class User(AbstractBaseUser, PermissionsMixin):
-    """User model in the system."""
 
-    passage_id = models.CharField(max_length=255, unique=True, verbose_name=_('passage_id'), help_text=_('Passage ID'))
+    passage_id = models.CharField(max_length=255, unique=True, null=True, blank=True)
     email = models.EmailField(max_length=255, unique=True, verbose_name=_('email'), help_text=_('Email'))
     name = models.CharField(max_length=255, blank=True, null=True, verbose_name=_('name'), help_text=_('Username'))
-    is_active = models.BooleanField(
-        default=True, verbose_name=_('Usuário está ativo'), help_text=_('Indica que este usuário está ativo.')
-    )
-    is_staff = models.BooleanField(
-        default=False,
-        verbose_name=_('Usuário é da equipe'),
-        help_text=_('Indica que este usuário pode acessar o Admin.'),
-    )
+    cellphone = models.CharField(max_length=11, blank=True, null=True, unique=True, verbose_name=_('cellphone'), help_text=_('Cellphone'))
+    DOB = models.DateField(blank=True, null=True, verbose_name=_('DOB'), help_text=_('DOB'))
+    cpf = models.CharField(max_length=11, blank=True, null=True, unique=True, verbose_name=_('CPF'), help_text=_('CPF'))
+    is_active = models.BooleanField(default=True)
+    is_staff = models.BooleanField(default=False)
 
     objects = UserManager()
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
+
 
     class Meta:
         """Meta options for the model."""
