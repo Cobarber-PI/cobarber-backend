@@ -12,7 +12,7 @@ class UserWriteSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ['id', 'name', 'email', 'password', 'confirm_password', 'cpf', 'cellphone', 'DOB']
+        fields = ['id', 'name', 'email', 'password', 'confirm_password', 'cpf', 'cellphone', 'DOB', 'is_owner']
         extra_kwargs = {
             'password': {'write_only': True},
             'confirm_password': {'write_only': True}
@@ -55,4 +55,4 @@ class UserWriteSerializer(serializers.ModelSerializer):
 class UserReadSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ['id', 'name', 'email', 'cellphone', 'DOB']
+        fields = ['id', 'name', 'email', 'cellphone', 'DOB', 'is_owner']
