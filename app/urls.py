@@ -13,10 +13,12 @@ from rest_framework_simplejwt.views import (
 from rest_framework_simplejwt.views import TokenVerifyView
 
 from core.views import UserViewSet
+from core.utils.virar_prop import VirarPropViewSet
 
 router = DefaultRouter()
 
 router.register(r'usuarios', UserViewSet, basename='usuarios')
+router.register(r'virar-proprietario', VirarPropViewSet, basename='virar-prop')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -39,4 +41,5 @@ urlpatterns = [
     path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     path('api/token/verify/', TokenVerifyView.as_view(), name='token_verify'),
+    # path removido, agora o ViewSet está registrado no router
 ]

@@ -47,6 +47,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     cpf = models.CharField(max_length=11, blank=True, null=True, unique=True, verbose_name=_('CPF'), help_text=_('CPF'))
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
+    is_owner = models.BooleanField(default=False)
 
     objects = UserManager()
 
