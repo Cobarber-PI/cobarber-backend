@@ -6,7 +6,8 @@ from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.utils.translation import gettext_lazy as _
 
-from core import models
+
+from core.models import User, info_da_barbearia, facilidades, servicos_oferecidos, Horario_de_funcionamento
 
 
 class UserAdmin(BaseUserAdmin):
@@ -51,4 +52,9 @@ class UserAdmin(BaseUserAdmin):
     )
 
 
-admin.site.register(models.User, UserAdmin)
+admin.site.register(User, UserAdmin)
+admin.site.register(info_da_barbearia)
+admin.site.register(facilidades)
+admin.site.register(servicos_oferecidos)
+admin.site.register(Horario_de_funcionamento)
+
