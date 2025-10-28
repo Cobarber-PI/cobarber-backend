@@ -5,7 +5,7 @@
 groups = ["default", "dev"]
 strategy = ["inherit_metadata"]
 lock_version = "4.5.0"
-content_hash = "sha256:8d5d13af0b68af61aff904766264034e0b4c0cfe7d4e949a845fa48562aa953f"
+content_hash = "sha256:529fd65c1564deae66b00c5e4f81ba9df8747309a7518f5f2e6ff723f05f0403"
 
 [[metadata.targets]]
 requires_python = ">=3.10"
@@ -1445,18 +1445,6 @@ files = [
 ]
 
 [[package]]
-name = "simplejwt"
-version = "2.0.1"
-summary = "A dead simple JWT library"
-groups = ["default"]
-dependencies = [
-    "typing",
-]
-files = [
-    {file = "simplejwt-2.0.1.tar.gz", hash = "sha256:3d9054c3f6c8ebca49693568b483f4bafcfdf962fe9e60f5bf0855bdc19761a2"},
-]
-
-[[package]]
 name = "six"
 version = "1.16.0"
 requires_python = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*"
@@ -1525,16 +1513,6 @@ groups = ["dev"]
 files = [
     {file = "traitlets-5.14.3-py3-none-any.whl", hash = "sha256:b74e89e397b1ed28cc831db7aea759ba6640cb3de13090ca145426688ff1ac4f"},
     {file = "traitlets-5.14.3.tar.gz", hash = "sha256:9ed0579d3502c94b4b3732ac120375cda96f923114522847de4b3bb98b96b6b7"},
-]
-
-[[package]]
-name = "typing"
-version = "3.7.4.3"
-requires_python = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*"
-summary = "Type Hints for Python"
-groups = ["default"]
-files = [
-    {file = "typing-3.7.4.3.tar.gz", hash = "sha256:1187fb9c82fd670d10aa07bbb6cfcfe4bdda42d6fab8d5134f04e8c4d0b71cc9"},
 ]
 
 [[package]]
