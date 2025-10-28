@@ -1,7 +1,8 @@
 from django.db import models
 
 class Barbearia(models.Model):
-    nome_da_barbearia = models.CharField(max_length=200, blank=False, null=False)
+    nome_da_barbearia = models.CharField(max_length=100, blank=False, null=False)
+    CNPJ_da_barbearia = models.CharField(max_length=14, blank=False, null=False, default='1')
     CEP = models.CharField(max_length=10, blank=False, null=False)
     UF_da_barbearia = models.CharField(max_length=20, blank=False, null=False)
     cidade_da_barbearia = models.CharField(max_length=50, blank=False, null=False)
