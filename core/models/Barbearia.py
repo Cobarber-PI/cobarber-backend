@@ -1,10 +1,39 @@
 from django.db import models
 
+# Lista de unidades federativas do Brasil (sigla, nome)
+class Estados(models.TextChoices):
+    AC = 'AC', 'Acre'
+    AL = 'AL', 'Alagoas'
+    AP = 'AP', 'Amapá'
+    AM = 'AM', 'Amazonas'
+    BA = 'BA', 'Bahia'
+    CE = 'CE', 'Ceará'
+    DF = 'DF', 'Distrito Federal'
+    ES = 'ES', 'Espírito Santo'
+    GO = 'GO', 'Goiás'
+    MA = 'MA', 'Maranhão'
+    MT = 'MT', 'Mato Grosso'
+    MS = 'MS', 'Mato Grosso do Sul'
+    MG = 'MG', 'Minas Gerais'
+    PA = 'PA', 'Pará'
+    PB = 'PB', 'Paraíba'
+    PR = 'PR', 'Paraná'
+    PE = 'PE', 'Pernambuco'
+    PI = 'PI', 'Piauí'
+    RJ = 'RJ', 'Rio de Janeiro'
+    RN = 'RN', 'Rio Grande do Norte'
+    RS = 'RS', 'Rio Grande do Sul'
+    RO = 'RO', 'Rondônia'
+    RR = 'RR', 'Roraima'
+    SC = 'SC', 'Santa Catarina'
+    SP = 'SP', 'São Paulo'
+    SE = 'SE', 'Sergipe'
+    TO = 'TO', 'Tocantins'
 class Barbearia(models.Model):
     nome_da_barbearia = models.CharField(max_length=100, blank=False, null=False)
     CNPJ_da_barbearia = models.CharField(max_length=14, blank=False, null=False, default='1')
-    CEP = models.CharField(max_length=10, blank=False, null=False)
-    UF_da_barbearia = models.CharField(max_length=20, blank=False, null=False)
+    CEP = models.CharField(max_length=8, blank=False, null=False)
+    UF_da_barbearia = models.CharField(max_length=2, choices=Estados.choices, blank=False, null=False)
     cidade_da_barbearia = models.CharField(max_length=50, blank=False, null=False)
     endereco_da_barbearia = models.CharField(max_length=50, blank=False, null=False)
     telefone_da_barbearia = models.CharField(max_length=11, blank=False, null=False)
