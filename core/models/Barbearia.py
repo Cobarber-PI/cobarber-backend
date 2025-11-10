@@ -1,3 +1,5 @@
+from django.conf import settings
+from django.contrib.auth.models import User
 from django.db import models
 
 # Lista de unidades federativas do Brasil (sigla, nome)
@@ -67,5 +69,14 @@ class Horario_de_funcionamento(models.Model):
     dia_da_semana = models.IntegerField(blank=False, null=False, choices=Dias_da_semana.choices)
     horario_abertura = models.TimeField(blank=False, null=False)
     horario_fechamento = models.TimeField(blank=False, null=False)    
+
+
+class Agendamento (models.Model):
+    horario = models.DateTimeField(blank=False, null=False)
+    horario_agendamento = models.DateTimeField(auto_now_add=True)
+    cancelado = models.BooleanField(default=False)
+    taxa_cancelamento = models.DecimalField(max_digits=6, decimal_places=2, null=True, blank=True)
+    cliente  = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    servico = models.ForeignKey(servicos_oferecidos, on_delete=models.CASCADE)
 
 
