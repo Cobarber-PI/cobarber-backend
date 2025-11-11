@@ -32,15 +32,15 @@ class Estados(models.TextChoices):
     SE = 'SE', 'Sergipe'
     TO = 'TO', 'Tocantins'
 class Barbearia(models.Model):
-    nome_da_barbearia = models.CharField(max_length=100, blank=False, null=False)
-    CNPJ_da_barbearia = models.CharField(max_length=14, blank=False, null=False, default='1')
-    CEP = models.CharField(max_length=8, blank=False, null=False)
-    UF_da_barbearia = models.CharField(max_length=2, choices=Estados.choices, blank=False, null=False)
-    cidade_da_barbearia = models.CharField(max_length=50, blank=False, null=False)
-    endereco_da_barbearia = models.CharField(max_length=50, blank=False, null=False)
-    telefone_da_barbearia = models.CharField(max_length=11, blank=False, null=False)
-    email_da_barbearia = models.EmailField(max_length=200, blank=False, null=False)
-    descricao_sobre_barbearia = models.TextField(max_length=500, blank=True, null=True)
+    nome = models.CharField(max_length=100, blank=False, null=False)
+    cnpj = models.CharField(max_length=14, blank=False, null=False, default='1')
+    cep = models.CharField(max_length=20, blank=False, null=False)
+    uf = models.CharField(max_length=2, choices=Estados.choices, blank=False, null=False)
+    cidade = models.CharField(max_length=50, blank=False, null=False)
+    endereco = models.CharField(max_length=50, blank=False, null=False)
+    telefone = models.CharField(max_length=11, blank=False, null=False)
+    email = models.EmailField(max_length=200, blank=False, null=False)
+    descricao = models.TextField(max_length=500, blank=True, null=True)
 
 
 class Comodidades(models.Model):
