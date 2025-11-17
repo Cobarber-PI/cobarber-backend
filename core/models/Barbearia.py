@@ -40,22 +40,11 @@ class Barbearia(models.Model):
     endereco = models.CharField(max_length=50, blank=False, null=False)
     telefone = models.CharField(max_length=11, blank=False, null=False)
     email = models.EmailField(max_length=200, blank=False, null=False)
-    descricao = models.TextField(max_length=500, blank=True, null=True)
-
-class Facilidades(models.Model):
-    WIFI = 'WIFI', 'Wi-Fi'
-    ESTACIONAMENTO = 'ESTACIONAMENTO', 'Estacionamento'
-    ACESSIBILIDADE = 'ACESSIBILIDADE', 'Acessibilidade'
-    BEBIDAS = 'BEBIDAS', 'Bebidas'
-    LANCHE = 'LANCHE', 'Lanche'
-    LAZER = 'LAZER', 'Área de Lazer'
-
+    descricao = models.TextField(max_length=500, blank=True, null=True) 
+    comodidades = models.ManyToManyField('Comodidades', blank=True)
 
 class Comodidades(models.Model):
-    tipo_comodidade = models.ManyToManyField(Facilidades)
-
-    def __str__(self):
-        return ", ".join([str(comodidade) for comodidade in self.tipo_comodidade.all()])
+    nome = models.CharField(max_length=100, blank=False, null=False)
 
 
 class servicos_oferecidos(models.Model):

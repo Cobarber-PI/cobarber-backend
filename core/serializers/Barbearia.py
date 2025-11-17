@@ -6,6 +6,7 @@ class BarbeariaSerializer(serializers.ModelSerializer):
         model = Barbearia
         fields = '__all__'
 
+
 class ComodidadesSerializer(serializers.ModelSerializer):
     class Meta:
         model = Comodidades
