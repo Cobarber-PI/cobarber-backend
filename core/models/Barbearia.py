@@ -43,15 +43,23 @@ class Barbearia(models.Model):
     descricao = models.TextField(max_length=500, blank=True, null=True) 
     comodidades = models.ManyToManyField('Comodidades', blank=True)
 
+    def __str__(self):
+        return f"{self.nome}"
+
 class Comodidades(models.Model):
     nome = models.CharField(max_length=100, blank=False, null=False)
 
+    def __str__(self):
+        return self.nome
 
 class servicos_oferecidos(models.Model):
     nome_do_servico = models.CharField(max_length=30, blank=False, null=False)
     valor_do_servico = models.DecimalField(max_digits=4, decimal_places=2, blank=False, null=False)
     tempo_estimado = models.DurationField(blank=False, null=False)
     descricao_do_servico = models.CharField(max_length=100, blank=True, null=True)
+
+    def __str__(self):
+        return f"{self.nome_do_servico}, {self.valor_do_servico}, {self.tempo_estimado}"
 
 class Dias_da_semana(models.IntegerChoices):
     SEGUNDA = 1, 'segunda-feira'
@@ -63,10 +71,26 @@ class Dias_da_semana(models.IntegerChoices):
     DOMINGO = 0, 'domingo'
 
 class Horario_de_funcionamento(models.Model):
-    dia_da_semana = models.IntegerField(blank=False, null=False, choices=Dias_da_semana.choices)
-    horario_abertura = models.TimeField(blank=False, null=False)
-    horario_fechamento = models.TimeField(blank=False, null=False)    
+    barbearia = models.ForeignKey(Barbearia, on_delete=models.CASCADE, related_name="horarios")
 
+    dia_da_semana = models.IntegerField(
+        blank=False, 
+        null=False, 
+        choices=Dias_da_semana.choices
+    )
+    horario_abertura = models.TimeField(blank=False, null=False)
+    horario_fechamento = models.TimeField(blank=False, null=False)
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(
+                fields=["barbearia", "dia_da_semana"],
+                name="unique_dia_por_barbearia"
+            )
+        ]
+
+    def __str__(self):
+        return f"{self.barbearia.nome} - {self.get_dia_da_semana_display()}"
 
 class Agendamento (models.Model):
     horario = models.DateTimeField(blank=False, null=False)
