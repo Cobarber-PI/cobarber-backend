@@ -12,13 +12,18 @@ from rest_framework_simplejwt.views import (
 )
 from rest_framework_simplejwt.views import TokenVerifyView
 
-from core.views import UserViewSet
+from core.views import UserViewSet, BarbeariaViewSet, ComodidadesViewSet, servicos_oferecidosViewSet,Horario_de_funcionamentoViewSet
+
 from core.utils.virar_prop import VirarPropViewSet
 
 router = DefaultRouter()
 
 router.register(r'usuarios', UserViewSet, basename='usuarios')
 router.register(r'virar-proprietario', VirarPropViewSet, basename='virar-prop')
+router.register(r'barbearias', BarbeariaViewSet, basename='barbearias')
+router.register(r'comodidades', ComodidadesViewSet, basename='comodidades')
+router.register(r'servicos-oferecidos', servicos_oferecidosViewSet, basename='servicos-oferecidos')
+router.register(r'horarios-funcionamento', Horario_de_funcionamentoViewSet, basename='horarios-funcionamento')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
