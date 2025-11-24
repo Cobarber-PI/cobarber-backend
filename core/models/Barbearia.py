@@ -34,9 +34,9 @@ class Estados(models.TextChoices):
 class Barbearia(models.Model):
     nome = models.CharField(max_length=100, blank=False, null=False)
     cnpj = models.CharField(max_length=14, blank=False, null=False, default='1')
-    cep = models.CharField(max_length=20, blank=False, null=False)
-    uf = models.CharField(max_length=2, choices=Estados.choices, blank=False, null=False)
-    cidade = models.CharField(max_length=50, blank=False, null=False)
+    cep = models.CharField(max_length=20, blank=True, null=True)
+    uf = models.CharField(max_length=2, choices=Estados.choices, blank=True, null=True)
+    cidade = models.CharField(max_length=50, blank=True, null=True)
     endereco = models.CharField(max_length=50, blank=False, null=False)
     telefone = models.CharField(max_length=11, blank=False, null=False)
     email = models.EmailField(max_length=200, blank=False, null=False)

@@ -5,12 +5,18 @@ class BarbeariaSerializer(serializers.ModelSerializer):
     class Meta:
         model = Barbearia
         fields = '__all__'
+        extra_kwargs = {
+            "comodidades": {"read_only": True},
+            "uf": {"allow_blank": True, "required": False},
+
+        }
 
 
 class ComodidadesSerializer(serializers.ModelSerializer):
     class Meta:
         model = Comodidades
         fields = '__all__'
+        
 
 class servicos_oferecidosSerializer(serializers.ModelSerializer):
     class Meta:
